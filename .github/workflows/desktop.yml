@@ -22,5 +22,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: qaroshi-desktop-keyboards
-          path: layouts/*/build/*_desktop.kmp
+          path: |
+            layouts/*/build/*_desktop.kmp
+            desktop/native/macos/*.keylayout
           if-no-files-found: error
