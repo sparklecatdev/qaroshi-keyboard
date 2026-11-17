@@ -1,0 +1,32 @@
+name: Native desktop source layouts
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  native-desktop:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate all native desktop mappings and offline corrections
+        run: python3 -m unittest discover -s tests -v
+      - name: Generate native macOS and Windows layouts
+        run: |
+          python3 scripts/build-macos-native.py
+          python3 scripts/build-windows-native.py
+          python3 scripts/package-native-desktop.py
+      - name: Validate Python syntax
+        run: |
+          python3 -m py_compile desktop/native/linux/ibus/*.py smarttext/*.py
+      - name: Upload native desktop source packages
+        uses: actions/upload-artifact@v4
+        with:
+          name: qaroshi-native-desktop
+          path: |
+            desktop/native/macos/*.keylayout
+            desktop/native/windows/*.klc
+            dist/qaroshi-linux-ibus.zip
+          if-no-files-found: error
