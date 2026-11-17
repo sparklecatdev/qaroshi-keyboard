@@ -11,11 +11,11 @@ begin Unicode > use(main)
 
 group(main) using keys
 + [K_Q] > U+0027
-+ [SHIFT K_Q] > U+0027
++ [SHIFT K_Q] > '"'
 + [K_W] > ','
-+ [SHIFT K_W] > ','
++ [SHIFT K_W] > '<'
 + [K_E] > '.'
-+ [SHIFT K_E] > '.'
++ [SHIFT K_E] > '>'
 + [K_R] > 'p'
 + [SHIFT K_R] > 'P'
 + [K_T] > 'y'
@@ -51,7 +51,7 @@ group(main) using keys
 + [K_COLON] > 's'
 + [SHIFT K_COLON] > 'S'
 + [K_Z] > ';'
-+ [SHIFT K_Z] > ';'
++ [SHIFT K_Z] > ':'
 + [K_X] > 'q'
 + [SHIFT K_X] > 'Q'
 + [K_C] > 'zh'
