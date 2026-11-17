@@ -1,0 +1,73 @@
+name: Native Windows DLLs
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generate canonical KLC files
+        run: python scripts/build-windows-native.py
+      - name: Install Microsoft Keyboard Layout Creator
+        shell: pwsh
+        run: choco install keyboard-layout-creator --yes --no-progress --limit-output
+      - name: Compile AMD64 and WOW64 layout DLLs
+        shell: pwsh
+        run: |
+          $ErrorActionPreference='Stop'
+          $roots=@(
+            (Join-Path ([Environment]::GetFolderPath('ProgramFilesX86')) 'Microsoft Keyboard Layout Creator 1.4'),
+            (Join-Path ([Environment]::GetFolderPath('ProgramFiles')) 'Microsoft Keyboard Layout Creator 1.4'),
+            (Join-Path $env:ChocolateyInstall 'lib\keyboard-layout-creator')
+          )
+          $tool=$null
+          foreach($dir in $roots){
+            if(Test-Path $dir){
+              $tool=Get-ChildItem -Path $dir -Filter kbdutool.exe -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1
+              if($tool){break}
+            }
+          }
+          if(!$tool){throw 'MSKLC kbdutool.exe unavailable'}
+          New-Item -ItemType Directory -Force -Path dist/windows/amd64,dist/windows/wow64 | Out-Null
+          Push-Location desktop/native/windows
+          try {
+            foreach($kind in @('qwerty','azerty','dvorak')){
+              $tags=@{qwerty='qrqwer1';azerty='qrazrt1';dvorak='qrdvor1'}
+              $tag=$tags[$kind]
+              $source="Qaroshi-$kind.klc"
+              & $tool.FullName -wum $source
+              if($LASTEXITCODE -ne 0){throw "AMD64 compilation failed: $source"}
+              $dll="$tag.dll"
+              if(!(Test-Path $dll)){throw "Expected AMD64 DLL missing: $dll"}
+              Copy-Item $dll "../../../dist/windows/amd64/$dll" -Force
+              Remove-Item $dll
+              & $tool.FullName -wuo $source
+              if($LASTEXITCODE -ne 0){throw "WOW64 compilation failed: $source"}
+              if(!(Test-Path $dll)){throw "Expected WOW64 DLL missing: $dll"}
+              Copy-Item $dll "../../../dist/windows/wow64/$dll" -Force
+              Remove-Item $dll
+            }
+          } finally { Pop-Location }
+      - name: Verify Windows output files
+        shell: pwsh
+        run: |
+          foreach($arch in @('amd64','wow64')){
+            foreach($name in @('qrqwer1','qrazrt1','qrdvor1')){
+              $file="dist/windows/$arch/$name.dll"
+              if(!(Test-Path $file) -or (Get-Item $file).Length -lt 1024){throw "Missing or empty: $file"}
+            }
+          }
+      - name: Upload installable native Windows layouts
+        uses: actions/upload-artifact@v4
+        with:
+          name: qaroshi-native-windows-installable
+          path: |
+            dist/windows/**/*.dll
+            desktop/native/windows/Install-Qaroshi.ps1
+            desktop/native/windows/*.klc
+          if-no-files-found: error
