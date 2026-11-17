@@ -11,7 +11,7 @@ import gi
 gi.require_version("IBus", "1.0")
 from gi.repository import IBus, GLib
 
-ROOT = pathlib.Path(__file__).resolve().parents[3]
+ROOT = pathlib.Path(__file__).resolve().parents[4]
 sys.path.insert(0, str(ROOT / "smarttext"))
 from qaroshi import autocorrect, suggestions
 
