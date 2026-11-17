@@ -9,7 +9,7 @@ SPEC = json.loads((ROOT / "mapping.json").read_text(encoding="utf-8"))
 KEYS = SPEC["physicalRows"]
 SPECIAL = SPEC["specialLetterReplacements"]
 VALID = set("abcdefghijklmnopqrstuvwxyz")
-RULE = re.compile(r"^\+ \[(SHIFT )?K_([A-Z0-9]+)\] > '((?:[^']|'')*)'$", re.M)
+RULE = re.compile(r"^\+ \[(SHIFT )?K_([A-Z0-9]+)\] > (?:'((?:[^']|'')*)'|(U\+[0-9A-F]{4,6}))$", re.M)
 
 class QaroshiLayouts(unittest.TestCase):
     def test_26_letters_and_desktop_touch_parity(self):
@@ -23,7 +23,7 @@ class QaroshiLayouts(unittest.TestCase):
                 name = f"qaroshi_{layout}"
                 folder = ROOT / "layouts" / layout / "source"
                 kmn = (folder / f"{name}.kmn").read_text(encoding="utf-8")
-                rules = {(bool(m.group(1)), m.group(2)): m.group(3).replace("''", "'") for m in RULE.finditer(kmn)}
+                rules = {(bool(m.group(1)), m.group(2)): (m.group(3).replace("''", "'") if m.group(3) is not None else chr(int(m.group(4)[2:], 16))) for m in RULE.finditer(kmn)}
                 self.assertEqual(len(rules), len(set(rules)))
                 touch = json.loads((folder / f"{name}.keyman-touch-layout").read_text(encoding="utf-8"))
                 for device in ("phone", "tablet"):
