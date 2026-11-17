@@ -74,7 +74,7 @@ group(main) using keys
 + [SHIFT K_LBRKT] > '{'
 + [K_RBRKT] > ']'
 + [SHIFT K_RBRKT] > '}'
-+ [K_QUOTE] > ''''
++ [K_QUOTE] > U+0027
 + [SHIFT K_QUOTE] > '"'
 + [K_HYPHEN] > '-'
 + [SHIFT K_HYPHEN] > '_'
