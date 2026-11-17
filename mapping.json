@@ -1,0 +1,165 @@
+{
+  "version": "1.0",
+  "physicalRows": [
+    [
+      "Q",
+      "W",
+      "E",
+      "R",
+      "T",
+      "Y",
+      "U",
+      "I",
+      "O",
+      "P"
+    ],
+    [
+      "A",
+      "S",
+      "D",
+      "F",
+      "G",
+      "H",
+      "J",
+      "K",
+      "L",
+      "COLON"
+    ],
+    [
+      "Z",
+      "X",
+      "C",
+      "V",
+      "B",
+      "N",
+      "M",
+      "COMMA",
+      "PERIOD",
+      "SLASH"
+    ]
+  ],
+  "layoutRows": {
+    "qwerty": [
+      [
+        "q",
+        "w",
+        "e",
+        "r",
+        "t",
+        "y",
+        "u",
+        "i",
+        "o",
+        "p"
+      ],
+      [
+        "a",
+        "s",
+        "d",
+        "f",
+        "g",
+        "h",
+        "j",
+        "k",
+        "l",
+        ";"
+      ],
+      [
+        "z",
+        "x",
+        "c",
+        "v",
+        "b",
+        "n",
+        "m",
+        ",",
+        ".",
+        "/"
+      ]
+    ],
+    "azerty": [
+      [
+        "a",
+        "z",
+        "e",
+        "r",
+        "t",
+        "y",
+        "u",
+        "i",
+        "o",
+        "p"
+      ],
+      [
+        "q",
+        "s",
+        "d",
+        "f",
+        "g",
+        "h",
+        "j",
+        "k",
+        "l",
+        "m"
+      ],
+      [
+        "w",
+        "x",
+        "c",
+        "v",
+        "b",
+        "n",
+        ",",
+        ";",
+        ":",
+        "!"
+      ]
+    ],
+    "dvorak": [
+      [
+        "'",
+        ",",
+        ".",
+        "p",
+        "y",
+        "f",
+        "g",
+        "c",
+        "r",
+        "l"
+      ],
+      [
+        "a",
+        "o",
+        "e",
+        "u",
+        "i",
+        "d",
+        "h",
+        "t",
+        "n",
+        "s"
+      ],
+      [
+        ";",
+        "q",
+        "j",
+        "k",
+        "x",
+        "b",
+        "m",
+        "w",
+        "v",
+        "z"
+      ]
+    ]
+  },
+  "specialLetterReplacements": {
+    "c": "ë",
+    "f": "kh",
+    "j": "zh",
+    "v": "sh",
+    "x": "ng"
+  },
+  "notes": "US ANSI physical key codes; shift maps first glyph to title-case (e.g. Kh). All output is Unicode Latin Romanization."
+}
