@@ -10,7 +10,7 @@ import qaroshi
 class Suggestions(unittest.TestCase):
     def test_canonical_lexicon(self):
         words=qaroshi.load()
-        self.assertGreater(len(words),4000)
+        self.assertEqual(len(words),30000)
         for word in ("më","zha","hëtiri","pingikha","rakuzhi","qaroshi"):
             if word == "qaroshi": continue
             self.assertIn(word, words)
