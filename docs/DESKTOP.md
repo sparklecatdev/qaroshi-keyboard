@@ -10,9 +10,16 @@ Open [Desktop keyboards Actions](https://github.com/sparklecatdev/qaroshi-keyboa
 
 Install [Keyman for Windows](https://keyman.com/windows/). Double-click the selected `.kmp` or import it from Keyman Configuration, then select it from your input method menu.
 
-## macOS
+## macOS: native, no Keyman required
 
-Install [Keyman for macOS](https://keyman.com/mac/). Import your `.kmp` from Keyman Configuration, then enable it in the macOS input menu.
+The **desktop artifact also includes three `.keylayout` files**, generated from the same QWERTY/AZERTY/Dvorak map as Keyman. Mac native layouts emit `ë`, `sh`, `zh`, `kh`, and `ng` on their corresponding keys, without an input-method app.
+
+1. Unzip `qaroshi-desktop-keyboards`, find `Qaroshi-Qwerty.keylayout`, `Qaroshi-Azerty.keylayout` or `Qaroshi-Dvorak.keylayout`.
+2. In Finder, choose **Go → Go to Folder** and enter `~/Library/Keyboard Layouts/`. Create that folder if missing, then copy in your chosen file.
+3. Sign out and sign back in (or restart). In **System Settings → Keyboard → Text Input → Edit → +**, look under **Others** for your Qaroshi layout.
+4. Switch to Qaroshi from the macOS input menu and test in TextEdit.
+
+These XML layouts are generated and checked for mapping completeness in CI, but have **not yet been physically tested on macOS**. Option and non-US keyboard combinations may need further device validation. If you prefer Keyman, use the `_desktop.kmp` alternative and [Keyman for macOS](https://keyman.com/mac/).
 
 ## Arch Linux and KDE Wayland
 
@@ -24,7 +31,7 @@ These are **physical-position** mappings. Keep the underlying operating-system k
 
 ## Native OS keyboards
 
-These desktop packages are **Keyman keyboards**, not Windows `.dll`, macOS `.keylayout`, or Linux XKB layouts. They still require Keyman. Independent native OS integration is a distinct workstream and must not be advertised as built until platform-specific installers are created and tested. The Mac and Linux native keyboards have tradeoffs around digraph output, and Windows native layouts require a tested layout compiler.
+The `.kmp` downloads remain **Keyman keyboards** (Windows, macOS and Linux). **macOS also has an experimental native `.keylayout` option** in the same desktop artifact. Native Windows drivers and full-fidelity Linux XKB layouts are not provided yet: Linux XKB ordinarily outputs one keysym per keypress and does not independently provide one-press multi-character Qaroshi digraphs.
 
 ## Build locally
 
