@@ -5,7 +5,7 @@ import shutil
 import subprocess
 import sys
 
-ROOT = Path(__file__).resolve().parents[3]
+ROOT = Path(__file__).resolve().parents[4]
 dest = Path.home() / ".local/share/qaroshi-ibus"
 component = Path.home() / ".local/share/ibus/component/qaroshi.xml"
 if len(sys.argv) == 2 and sys.argv[1] == "--uninstall":
@@ -26,7 +26,7 @@ shutil.copyfile(ROOT / "data/qaroshi-lexicon.json", dest / "qaroshi-lexicon.json
 shutil.copyfile(ROOT / "smarttext/qaroshi.py", dest / "qaroshi.py")
 # Engine expects the installed bundle's parent for Python resources:
 engine = (dest / "engine.py").read_text()
-engine = engine.replace('ROOT = pathlib.Path(__file__).resolve().parents[3]', 'ROOT = pathlib.Path(__file__).resolve().parent')
+engine = engine.replace('ROOT = pathlib.Path(__file__).resolve().parents[4]', 'ROOT = pathlib.Path(__file__).resolve().parent')
 engine = engine.replace('sys.path.insert(0, str(ROOT / "smarttext"))', 'sys.path.insert(0, str(ROOT))')
 engine = engine.replace('ROOT / "mapping.json"', 'ROOT / "mapping.json"')
 (dest / "engine.py").write_text(engine)
