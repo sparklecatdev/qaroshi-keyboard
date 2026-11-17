@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Package>
+  <System><KeymanDeveloperVersion>18.0.0.0</KeymanDeveloperVersion><FileVersion>7.0</FileVersion></System>
+  <Options><ReadMeFile>readme.htm</ReadMeFile><LicenseFile>../../../LICENSE</LicenseFile><WelcomeFile>readme.htm</WelcomeFile><FollowKeyboardVersion/></Options>
+  <Info><Name>Qaroshi QWERTY (Desktop)</Name><Description>Qaroshi QWERTY Romanization for Windows, macOS and Linux desktop keyboards.</Description></Info>
+  <Files>
+    <File><Name>../build/qaroshi_qwerty.kmx</Name><Description>Qaroshi desktop keyboard</Description><CopyLocation>0</CopyLocation><FileType>.kmx</FileType></File>
+    <File><Name>readme.htm</Name><Description>Installation help</Description><CopyLocation>0</CopyLocation><FileType>.htm</FileType></File>
+    <File><Name>../../../LICENSE</Name><Description>License</Description><CopyLocation>0</CopyLocation><FileType>.txt</FileType></File>
+  </Files>
+  <Keyboards><Keyboard><ID>qaroshi_qwerty</ID><Languages><Language ID="und-Latn-x-qaroshi">Qaroshi (Latin)</Language></Languages></Keyboard></Keyboards>
+</Package>
