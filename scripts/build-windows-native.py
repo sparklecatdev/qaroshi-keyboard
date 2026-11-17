@@ -59,7 +59,15 @@ def klc(layout,rows):
             for shift,v in [(0,low),(1,high)]:
                 if len(v)>1:
                     ligatures.append(f'{vkey}\t{shift}\t'+'\t'.join(f'{ord(c):04X}' for c in v))
+    physical_for_vk = {
+        "OEM_MINUS":"HYPHEN","OEM_PLUS":"EQUAL","OEM_4":"LBRKT",
+        "OEM_6":"RBRKT","OEM_7":"QUOTE","OEM_3":"BKQUOTE",
+        "OEM_5":"BKSLASH"
+    }
     for sc,vkey,low,high in EXTRA:
+        overrides=SPEC.get("extraKeys",{}).get(layout,{})
+        key=physical_for_vk.get(vkey,vkey)
+        low,high=overrides.get(key,(low,high))
         result.setdefault(sc,(vkey,"0",low,high))
     for sc,(vkey,caps,low,high) in sorted(result.items(),key=lambda kv:int(kv[0],16)):
         lines.append(f"{sc}\t{vkey}\t{caps}\t{val(low)}\t{val(high)}\t-1")
