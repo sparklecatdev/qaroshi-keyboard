@@ -4,3 +4,15 @@ __pycache__/
 *.py[cod]
 .DS_Store
 node_modules/
+
+# Generated native apps, artifacts and resource copies
+dist/
+android/.gradle/
+android/build/
+android/app/build/
+android/app/src/main/assets/
+ios/QaroshiKeyboard.xcodeproj/
+ios/build/
+ios/App/Info.plist
+ios/Keyboard/Info.plist
+ios/Keyboard/Resources/

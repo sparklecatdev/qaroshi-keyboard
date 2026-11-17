@@ -1,63 +1,57 @@
 # Qaroshi Keyboard
 
-Type **Qaroshi Romanization** on Windows, macOS, Linux, Android, iPhone and iPad. Supports **QWERTY, AZERTY, and Dvorak**.
+Native Qaroshi input projects for Windows, macOS, Linux, Android and iOS, with QWERTY, AZERTY and Dvorak layouts. All output is **Unicode Qaroshi Romanization**, not experimental native-script PUA text.
 
-**Choose your device first.** Desktop and mobile now have **separate builds, packages, CI checks, and installation guides**, while sharing the same canonical Qaroshi letter mapping.
+## Native installs and packages
 
-| Device | Download | Installation guide | Engine |
+**[Full native installation guide](docs/NATIVE_INSTALL.md)** describes support levels, prerequisites and privacy.
+
+| OS | Native method | Build/download | Status |
 |---|---|---|---|
-| Windows, macOS, Linux | [Desktop build](https://github.com/sparklecatdev/qaroshi-keyboard/actions/workflows/desktop.yml) → `qaroshi-desktop-keyboards` | [Desktop instructions](docs/DESKTOP.md) | Keyman desktop |
-| Android, iPhone, iPad | [Mobile build](https://github.com/sparklecatdev/qaroshi-keyboard/actions/workflows/mobile.yml) → `qaroshi-mobile-keyboards` | [Mobile instructions](docs/MOBILE.md) | Keyman mobile |
+| Windows | MSKLC layout with one-key digraph ligatures | [Compiled Windows DLLs](https://github.com/sparklecatdev/qaroshi-keyboard/actions/workflows/windows-native.yml) | AMD64/WOW64 DLL compilation passed in Windows CI; admin install script included; on-device verification pending |
+| macOS | Apple .keylayout input sources | [Native desktop artifact](https://github.com/sparklecatdev/qaroshi-keyboard/actions/workflows/native-desktop.yml) | XML generated and checked; physical hardware validation pending |
+| Linux/Arch | IBus native input engine | [Linux IBus bundle](https://github.com/sparklecatdev/qaroshi-keyboard/actions/workflows/native-desktop.yml) | Per-user installer, suggestions, syntax checked; GUI/device verification pending |
+| Android | Native InputMethodService | [Debug APK](https://github.com/sparklecatdev/qaroshi-keyboard/actions/workflows/android-native.yml) | APK must pass CI; enable through Android Settings |
+| iOS/iPadOS | UIKit custom keyboard extension | [Xcode source / simulator build](https://github.com/sparklecatdev/qaroshi-keyboard/actions/workflows/ios-native.yml) | Xcode build needs Apple signing to install on physical iPhone |
 
-Open the latest successful `main` workflow run, download and unzip the named artifact, then select a QWERTY, AZERTY, or Dvorak `.kmp`. Install [Keyman](https://keyman.com/downloads/) and import that package.
+Source-ready is not device-proven: Windows native binaries are built by MSKLC in CI but not device-attested, and an unsigned iOS Simulator app cannot be installed on a normal iPhone. The compiled Keyman packages remain available as fallbacks.
 
-## Why separate?
+## Offline suggestions and autocorrect
 
-Desktop Keyman installs a **`.kmx`** keyboard, while phone and tablet Keyman installs a **`.js`** touch keyboard. The packages are now independently built and validated. The user does not have to download both targets inside one package. [Keyman package documentation](https://help.keyman.com/developer/current-version/guides/distribute/packages).
+The native Android and iOS keyboards and Linux IBus engine use a bundled **30,000-headword canonical Qaroshi lexicon**, with source revisions in [data/qaroshi-lexicon.json](data/qaroshi-lexicon.json). Includes prefix suggestions, conservative one-edit typo correction, and basic typing helpers. Known words, hyphenated compounds, short words and proper-capitalized names are protected. Android/iOS offer correction undo, number/symbol keys, shift, caps lock, and layout choice. No user text is uploaded.
 
-## Typing behavior
+**Not yet feature-parity with Gboard or Apple Keyboard:** swipe typing, personalized learning, a full emoji keyboard, dictation, context-aware neural prediction and OS-wide desktop autocorrect are not implemented. Current lexicon is a curated subset, the complete canonical headword inventory, not speaker-validated usage.
 
-* Qaroshi uses 26 native letters. This release produces portable Unicode Latin Romanization, not the experimental native-glyph PUA encoding.
-* Each layout preserves 21 other Latin letters. The five unused Latin letter positions become **C → ë**, **F → kh**, **J → zh**, **V → sh**, **X → ng**, positioned according to the *selected* QWERTY/AZERTY/Dvorak mapping.
-* Shift produces **Ë**, **Kh**, **Zh**, **Sh**, **Ng**.
-* The four digraphs each represent one native Qaroshi grapheme but output two Latin Unicode characters.
-* On desktop these are **positional** Keyman layouts. Set the base OS layout to **US QWERTY**, then choose the desired Qaroshi QWERTY/AZERTY/Dvorak variant inside Keyman to avoid double remapping.
+## Keyman fallback packages
 
-## Native macOS option
+| Platform | Build | Guide |
+|---|---|---|
+| Windows, macOS, Linux | [Keyman desktop](https://github.com/sparklecatdev/qaroshi-keyboard/actions/workflows/desktop.yml) | [Desktop](docs/DESKTOP.md) |
+| Android, iOS | [Keyman mobile](https://github.com/sparklecatdev/qaroshi-keyboard/actions/workflows/mobile.yml) | [Mobile](docs/MOBILE.md) |
 
-The **desktop build** additionally exports `Qaroshi-Qwerty.keylayout`, `Qaroshi-Azerty.keylayout` and `Qaroshi-Dvorak.keylayout` for direct macOS input-source installation **without Keyman**. See [macOS steps](docs/DESKTOP.md#macos-native-no-keyman-required). These are structurally tested but haven't yet been verified on physical Mac hardware. Windows and Linux retain the Keyman desktop packages for full digraph behavior.
+### Layout rules
 
-## Build and test
+Each layout preserves its 21 other Latin letter positions. The unused Latin letter slots map **C → ë**, **F → kh**, **J → zh**, **V → sh**, **X → ng** in the corresponding QWERTY, AZERTY, or Dvorak positions. Shift yields **Ë, Kh, Zh, Sh, Ng**. Four Romanized digraphs each correspond to one native Qaroshi grapheme.
 
-```bash
-git clone https://github.com/sparklecatdev/qaroshi-keyboard.git
-cd qaroshi-keyboard
-npm install -g @keymanapp/kmc@18
-python3 -m unittest discover -s tests -v
-bash scripts/build-desktop.sh
-bash scripts/build-mobile.sh
-```
+## Build locally
 
-Build outputs are at `layouts/*/build/*_desktop.kmp` and `layouts/*/build/*_mobile.kmp`. Each script builds **only its own platform packages** and checks the ZIP contents. GitHub Actions runs them in separate workflows.
+    python3 -m unittest discover -s tests -v
+    python3 scripts/build-windows-native.py
+    python3 scripts/build-macos-native.py
+    python3 scripts/package-native-desktop.py
+    python3 scripts/prepare-mobile-native.py
 
-## Current scope
+    # Optional Keyman builds with kmc installed:
+    bash scripts/build-desktop.sh
+    bash scripts/build-mobile.sh
 
-The builds compile the Keyman keyboard source and verify expected package contents. **They are not native Windows DLL or Linux XKB layouts**, and mobile packages do not modify Apple's built-in keyboard or Gboard. Producing native OS layouts and dedicated mobile keyboard apps requires separate platform-specific implementations and testing. CI compilation is not a substitute for real on-device text-entry tests.
+    # Android SDK + Gradle 8.13:
+    gradle -p android :app:assembleDebug
 
-## Repository organization
+    # macOS, Xcode and XcodeGen:
+    (cd ios && xcodegen generate)
+    xcodebuild -project ios/QaroshiKeyboard.xcodeproj -scheme QaroshiKeyboard -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' CODE_SIGNING_ALLOWED=NO build
 
-```text
-mapping.json                        Canonical QWERTY/AZERTY/Dvorak mapping
-layouts/{qwerty,azerty,dvorak}/     Shared KMN and touch source
-  source/*_desktop.kps              Desktop .kmx package manifests
-  source/*_mobile.kps               Mobile .js package manifests
-scripts/build-desktop.sh            Desktop-only package builder
-scripts/build-mobile.sh             Mobile-only package builder
-.github/workflows/desktop.yml       Desktop CI + download artifact
-.github/workflows/mobile.yml        Mobile CI + download artifact
-docs/DESKTOP.md                     Windows/macOS/Linux installation
-docs/MOBILE.md                      Android/iOS installation
-tests/                              Letter/output parity and package checks
-```
+Separate CI workflows validate native desktop mappings, Android, iOS and existing Keyman desktop/mobile packages. Compilation on GitHub doesn't prove end-user device compatibility.
 
-See the [Qaroshi language reference](https://github.com/sparklecatdev/qaroshi). Licensed under [MIT](LICENSE).
+See [Qaroshi language](https://github.com/sparklecatdev/qaroshi). MIT licensed.

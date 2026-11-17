@@ -1,0 +1,28 @@
+name: Native iOS keyboard extension
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  ios:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install XcodeGen
+        run: brew install xcodegen
+      - name: Sync offline lexicon and layout resources
+        run: python3 scripts/prepare-mobile-native.py
+      - name: Generate iOS Xcode project
+        run: cd ios && xcodegen generate
+      - name: Build app and keyboard extension for iOS Simulator
+        run: |
+          xcodebuild -project ios/QaroshiKeyboard.xcodeproj -scheme QaroshiKeyboard -configuration Debug -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' -derivedDataPath ios/build CODE_SIGNING_ALLOWED=NO build
+      - name: Publish unsigned simulator build
+        uses: actions/upload-artifact@v4
+        with:
+          name: qaroshi-ios-simulator-unsigned
+          path: ios/build/Build/Products/Debug-iphonesimulator/QaroshiKeyboard.app
+          if-no-files-found: error
