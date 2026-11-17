@@ -36,7 +36,7 @@ class QaroshiLayouts(unittest.TestCase):
                                 if physical not in KEYS[rowindex]:
                                     continue
                                 out = SPECIAL.get(ordinary,ordinary)
-                                out = (out[:1].upper() + out[1:]) if shifted else out
+                                out = ((SPEC["shiftPunctuation"].get(layout, {}).get(physical) or (out[:1].upper() + out[1:])) if shifted else out)
                                 self.assertEqual(rules[(shifted, physical)], out)
                                 self.assertEqual(bykey["K_"+physical]["text"], out)
                     for switch in ("K_NUMERALS", "K_SPACE", "K_ENTER"):
