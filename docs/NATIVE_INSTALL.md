@@ -10,16 +10,32 @@ These are **operating-system input sources**, not the existing Keyman packages. 
 
 [Native iOS build check](https://github.com/sparklecatdev/qaroshi-keyboard/actions/workflows/ios-native.yml). CI publishes an **unsigned iOS Simulator app**, not an iPhone-installable IPA.
 
-## Windows 10 / 11 (native layout DLL)
+## Windows 10 / 11 (native layout DLL, no Keyman)
 
-Source files: `Qaroshi-qwerty.klc`, `Qaroshi-azerty.klc`, `Qaroshi-dvorak.klc`.
+**Compiled x64/WOW64 DLLs are produced by Windows GitHub Actions** using Microsoft Keyboard Layout Creator. They are not yet tested interactively on a Windows device.
 
-1. Install [Microsoft Keyboard Layout Creator 1.4](https://www.microsoft.com/en-us/download/details.aspx?id=102134).
-2. Open the desired `.klc` under **File → Load Source File**. The KLC includes multi-character ligature definitions for one-key `sh`, `zh`, `kh` and `ng`.
-3. Choose **Project → Build DLL and Setup Package**, then run the generated `setup.exe` and follow the prompts.
-4. Enable the new keyboard via Windows language/input settings. Switch via **Win+Space**.
+1. Open [Native Windows DLLs](https://github.com/sparklecatdev/qaroshi-keyboard/actions/workflows/windows-native.yml), choose the latest successful build on `main`, and download **`qaroshi-native-windows-installable`**.
+2. Unzip. Confirm the extracted folder contains `Install-Qaroshi.ps1`, an `amd64/` directory and a `wow64/` directory. Don't move those folders apart.
+3. Open **PowerShell as Administrator**, change into the extracted directory, inspect the install script, then run for the desired variant:
 
-**Important:** This repository builds and validates KLC *sources* only. It does **not** yet ship a tested Windows DLL or installer. MSKLC is legacy tooling and may require compatibility steps on Windows 11. If it refuses to compile a source or install the resulting layout, use the [working Keyman desktop fallback](DESKTOP.md) rather than trusting an unverified binary. Native Windows layouts by themselves do not provide autocorrect; that requires a separate Windows text input service.
+```powershell
+powershell.exe -ExecutionPolicy Bypass -File .\Install-Qaroshi.ps1 -Layout dvorak
+# Or -Layout qwerty / -Layout azerty
+```
+
+4. Sign out and back in or restart. Enable the new **Qaroshi DVORAK / AZERTY / QWERTY** keyboard from Windows language/input settings and switch using **Win+Space**.
+
+To unregister a variant, run elevated:
+
+```powershell
+powershell.exe -ExecutionPolicy Bypass -File .\Install-Qaroshi.ps1 -Layout dvorak -Uninstall
+```
+
+The uninstall action removes only that known registry layout entry. To avoid removing a DLL while Windows may still have it loaded, **it leaves installed DLL files for manual cleanup after a restart**. The installer refuses existing same-named DLLs and registry IDs to avoid overwriting other software.
+
+**Alternate manual route:** Use `Qaroshi-qwerty.klc`, `Qaroshi-azerty.klc`, or `Qaroshi-dvorak.klc` with [Microsoft Keyboard Layout Creator](https://www.microsoft.com/en-us/download/details.aspx?id=102134) to build a standard setup package. If native installation fails, use the [Keyman desktop fallback](DESKTOP.md).
+
+**Autocorrect:** Windows native DLL layouts provide letter input and one-key digraphs. They **do not** supply Qaroshi-specific autocorrect or suggestions across arbitrary applications; that would require a separate text-input service (TSF) with a substantially larger implementation and safety review.
 
 ## macOS (native input source)
 
