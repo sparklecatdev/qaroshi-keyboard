@@ -18,9 +18,9 @@ Source-ready is not device-proven: the Windows KLC file isn't a DLL, and an unsi
 
 ## Offline suggestions and autocorrect
 
-The native Android and iOS keyboards and Linux IBus engine use a bundled **4,395-headword canonical Qaroshi lexicon**, with source revisions in [data/qaroshi-lexicon.json](data/qaroshi-lexicon.json). Includes prefix suggestions, conservative one-edit typo correction, and basic typing helpers. Known words, hyphenated compounds, short words and proper-capitalized names are protected. Android/iOS offer correction undo, number/symbol keys, shift, caps lock, and layout choice. No user text is uploaded.
+The native Android and iOS keyboards and Linux IBus engine use a bundled **30,000-headword canonical Qaroshi lexicon**, with source revisions in [data/qaroshi-lexicon.json](data/qaroshi-lexicon.json). Includes prefix suggestions, conservative one-edit typo correction, and basic typing helpers. Known words, hyphenated compounds, short words and proper-capitalized names are protected. Android/iOS offer correction undo, number/symbol keys, shift, caps lock, and layout choice. No user text is uploaded.
 
-**Not yet feature-parity with Gboard or Apple Keyboard:** swipe typing, personalized learning, a full emoji keyboard, dictation, context-aware neural prediction and OS-wide desktop autocorrect are not implemented. Current lexicon is a curated subset, not the entire Qaroshi dictionary.
+**Not yet feature-parity with Gboard or Apple Keyboard:** swipe typing, personalized learning, a full emoji keyboard, dictation, context-aware neural prediction and OS-wide desktop autocorrect are not implemented. Current lexicon is a curated subset, the complete canonical headword inventory, not speaker-validated usage.
 
 ## Keyman fallback packages
 
