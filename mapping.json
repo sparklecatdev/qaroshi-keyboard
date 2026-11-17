@@ -161,5 +161,25 @@
     "v": "sh",
     "x": "ng"
   },
-  "notes": "US ANSI physical key codes; shift maps first glyph to title-case (e.g. Kh). All output is Unicode Latin Romanization."
+  "notes": "US ANSI physical key codes; shift maps first glyph to title-case (e.g. Kh). All output is Unicode Latin Romanization.",
+  "shiftPunctuation": {
+    "qwerty": {
+      "COLON": ":",
+      "COMMA": "<",
+      "PERIOD": ">",
+      "SLASH": "?"
+    },
+    "azerty": {
+      "M": "?",
+      "COMMA": ".",
+      "PERIOD": "/",
+      "SLASH": "§"
+    },
+    "dvorak": {
+      "Q": "\"",
+      "W": "<",
+      "E": ">",
+      "Z": ":"
+    }
+  }
 }
