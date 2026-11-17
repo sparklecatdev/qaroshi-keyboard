@@ -2,10 +2,9 @@
 <Package>
   <System><KeymanDeveloperVersion>18.0.0.0</KeymanDeveloperVersion><FileVersion>7.0</FileVersion></System>
   <Options><ReadMeFile>readme.htm</ReadMeFile><LicenseFile>../../../LICENSE</LicenseFile><WelcomeFile>readme.htm</WelcomeFile><FollowKeyboardVersion/></Options>
-  <Info><Name>Qaroshi AZERTY</Name><Description>Portable Romanized Qaroshi using AZERTY physical letter positions. Switch the system base input layout to US QWERTY before selecting this positional Keyman layout.</Description></Info>
+  <Info><Name>Qaroshi AZERTY (Mobile)</Name><Description>Qaroshi AZERTY Romanization for Android and iPhone/iPad touch keyboards.</Description></Info>
   <Files>
-    <File><Name>../build/qaroshi_azerty.kmx</Name><Description>Qaroshi desktop keyboard</Description><CopyLocation>0</CopyLocation><FileType>.kmx</FileType></File>
-    <File><Name>../build/qaroshi_azerty.js</Name><Description>Qaroshi touch and web keyboard</Description><CopyLocation>0</CopyLocation><FileType>.js</FileType></File>
+    <File><Name>../build/qaroshi_azerty.js</Name><Description>Qaroshi mobile keyboard</Description><CopyLocation>0</CopyLocation><FileType>.js</FileType></File>
     <File><Name>readme.htm</Name><Description>Installation help</Description><CopyLocation>0</CopyLocation><FileType>.htm</FileType></File>
     <File><Name>../../../LICENSE</Name><Description>License</Description><CopyLocation>0</CopyLocation><FileType>.txt</FileType></File>
   </Files>

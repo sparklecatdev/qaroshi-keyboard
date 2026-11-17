@@ -46,10 +46,12 @@ class QaroshiLayouts(unittest.TestCase):
     def test_package_contents_and_language(self):
         for layout in SPEC["layoutRows"]:
             folder = ROOT / "layouts" / layout / "source"
-            kps = ET.parse(folder / f"qaroshi_{layout}.kps")
-            ns = {file.findtext("FileType") for file in kps.findall(".//Files/File")}
-            self.assertTrue({".kmx", ".js", ".htm"}.issubset(ns))
-            self.assertEqual(kps.find(".//Keyboard/Languages/Language").attrib["ID"], "und-Latn-x-qaroshi")
+            for platform, wanted in (("desktop", ".kmx"), ("mobile", ".js")):
+                kps = ET.parse(folder / f"qaroshi_{layout}_{platform}.kps")
+                ns = {file.findtext("FileType") for file in kps.findall(".//Files/File")}
+                self.assertIn(wanted, ns)
+                self.assertNotIn(".js" if platform == "desktop" else ".kmx", ns)
+                self.assertEqual(kps.find(".//Keyboard/Languages/Language").attrib["ID"], "und-Latn-x-qaroshi")
 
     def test_no_native_pua_output(self):
         for path in ROOT.glob("layouts/*/source/*.kmn"):

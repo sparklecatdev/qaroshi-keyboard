@@ -1,0 +1,26 @@
+name: Mobile keyboards
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  mobile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Keyman compiler
+        run: npm install -g @keymanapp/kmc@18
+      - name: Compile and test three mobile layouts
+        run: bash scripts/build-mobile.sh
+      - name: Publish mobile artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: qaroshi-mobile-keyboards
+          path: layouts/*/build/*_mobile.kmp
+          if-no-files-found: error
