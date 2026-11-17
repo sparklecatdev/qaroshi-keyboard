@@ -10,8 +10,8 @@ store(&LAYOUTFILE) 'qaroshi_dvorak.keyman-touch-layout'
 begin Unicode > use(main)
 
 group(main) using keys
-+ [K_Q] > ''''
-+ [SHIFT K_Q] > ''''
++ [K_Q] > U+0027
++ [SHIFT K_Q] > U+0027
 + [K_W] > ','
 + [SHIFT K_W] > ','
 + [K_E] > '.'
