@@ -8,13 +8,13 @@ Native Qaroshi input projects for Windows, macOS, Linux, Android and iOS, with Q
 
 | OS | Native method | Build/download | Status |
 |---|---|---|---|
-| Windows | MSKLC layout with one-key digraph ligatures | [Windows layout sources](https://github.com/sparklecatdev/qaroshi-keyboard/actions/workflows/native-desktop.yml) | Sources tested; native DLL/setup needs MSKLC compilation and device verification |
+| Windows | MSKLC layout with one-key digraph ligatures | [Compiled Windows DLLs](https://github.com/sparklecatdev/qaroshi-keyboard/actions/workflows/windows-native.yml) | AMD64/WOW64 DLL compilation passed in Windows CI; admin install script included; on-device verification pending |
 | macOS | Apple .keylayout input sources | [Native desktop artifact](https://github.com/sparklecatdev/qaroshi-keyboard/actions/workflows/native-desktop.yml) | XML generated and checked; physical hardware validation pending |
 | Linux/Arch | IBus native input engine | [Linux IBus bundle](https://github.com/sparklecatdev/qaroshi-keyboard/actions/workflows/native-desktop.yml) | Per-user installer, suggestions, syntax checked; GUI/device verification pending |
 | Android | Native InputMethodService | [Debug APK](https://github.com/sparklecatdev/qaroshi-keyboard/actions/workflows/android-native.yml) | APK must pass CI; enable through Android Settings |
 | iOS/iPadOS | UIKit custom keyboard extension | [Xcode source / simulator build](https://github.com/sparklecatdev/qaroshi-keyboard/actions/workflows/ios-native.yml) | Xcode build needs Apple signing to install on physical iPhone |
 
-Source-ready is not device-proven: the Windows KLC file isn't a DLL, and an unsigned iOS Simulator app cannot be installed on a normal iPhone. The compiled Keyman packages remain available as fallbacks.
+Source-ready is not device-proven: Windows native binaries are built by MSKLC in CI but not device-attested, and an unsigned iOS Simulator app cannot be installed on a normal iPhone. The compiled Keyman packages remain available as fallbacks.
 
 ## Offline suggestions and autocorrect
 
