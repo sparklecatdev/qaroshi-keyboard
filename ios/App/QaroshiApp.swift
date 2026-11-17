@@ -1,7 +1,8 @@
 import SwiftUI
 
 @main
-struct QaroshiApp: App {\n    @State private var sample = ""
+struct QaroshiApp: App {
+    @State private var sample = ""
     var body: some Scene {
         WindowGroup {
             NavigationStack {
