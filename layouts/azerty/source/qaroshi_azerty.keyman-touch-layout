@@ -373,25 +373,25 @@
               },
               {
                 "id": "K_M",
-                "text": ",",
+                "text": "?",
                 "layer": "shift",
                 "nextlayer": "default"
               },
               {
                 "id": "K_COMMA",
-                "text": ";",
+                "text": ".",
                 "layer": "shift",
                 "nextlayer": "default"
               },
               {
                 "id": "K_PERIOD",
-                "text": ":",
+                "text": "/",
                 "layer": "shift",
                 "nextlayer": "default"
               },
               {
                 "id": "K_SLASH",
-                "text": "!",
+                "text": "§",
                 "layer": "shift",
                 "nextlayer": "default"
               },
@@ -978,25 +978,25 @@
               },
               {
                 "id": "K_M",
-                "text": ",",
+                "text": "?",
                 "layer": "shift",
                 "nextlayer": "default"
               },
               {
                 "id": "K_COMMA",
-                "text": ";",
+                "text": ".",
                 "layer": "shift",
                 "nextlayer": "default"
               },
               {
                 "id": "K_PERIOD",
-                "text": ":",
+                "text": "/",
                 "layer": "shift",
                 "nextlayer": "default"
               },
               {
                 "id": "K_SLASH",
-                "text": "!",
+                "text": "§",
                 "layer": "shift",
                 "nextlayer": "default"
               },
