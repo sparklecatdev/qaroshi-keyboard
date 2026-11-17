@@ -27,6 +27,14 @@ for variant, rows in SPEC["layoutRows"].items():
             high = SPEC["shiftPunctuation"].get(variant, {}).get(keyname, low[:1].upper()+low[1:])
             keyval = {"COLON": ";", "COMMA": ",", "PERIOD": ".", "SLASH": "/"}.get(keyname, keyname.lower())
             table[keyval] = (low, high)
+    us_extras = {str(n):str(n) for n in range(10)}
+    us_extras.update({
+        "HYPHEN":"-", "EQUAL":"=", "LBRKT":"[", "RBRKT":"]",
+        "BKSLASH":"\\", "QUOTE":"'", "BKQUOTE":"`"
+    })
+    for key, pair in SPEC.get("extraKeys",{}).get(variant,{}).items():
+        if key in us_extras:
+            table[us_extras[key]] = tuple(pair)
     ORDINARY[variant] = table
 
 class QaroshiEngine(IBus.Engine):
@@ -97,6 +105,12 @@ class QaroshiEngine(IBus.Engine):
             self._flush()
             return False
         char = chr(physical).lower()
+        # IBus keyvals already reflect Shift, but our map keys use physical US base symbols.
+        us_shifted = {"!":"1","@":"2","#":"3","$":"4","%":"5","^":"6",
+                      "&":"7","*":"8","(":"9",")":"0","_":"-","+":"=",
+                      "{":"[","}":"]","|":"\\",'"':"'", "~":"`",":":";",
+                      "<":",",">":".","?":"/"}
+        char = us_shifted.get(char, char)
         shifted = bool(state & mods.SHIFT_MASK)
         row = ORDINARY[self.layout].get(char)
         if row:
