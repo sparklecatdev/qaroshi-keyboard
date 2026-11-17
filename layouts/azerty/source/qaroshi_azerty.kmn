@@ -78,7 +78,7 @@ group(main) using keys
 + [SHIFT K_2] > '2'
 + [K_3] > '"'
 + [SHIFT K_3] > '3'
-+ [K_4] > ''''
++ [K_4] > U+0027
 + [SHIFT K_4] > '4'
 + [K_5] > '('
 + [SHIFT K_5] > '5'
