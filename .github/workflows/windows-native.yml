@@ -62,12 +62,14 @@ jobs:
               if(!(Test-Path $file) -or (Get-Item $file).Length -lt 1024){throw "Missing or empty: $file"}
             }
           }
+      - name: Stage installer alongside architecture DLL folders
+        shell: pwsh
+        run: |
+          Copy-Item desktop/native/windows/Install-Qaroshi.ps1 dist/windows/
+          Copy-Item desktop/native/windows/*.klc dist/windows/
       - name: Upload installable native Windows layouts
         uses: actions/upload-artifact@v4
         with:
           name: qaroshi-native-windows-installable
-          path: |
-            dist/windows/**/*.dll
-            desktop/native/windows/Install-Qaroshi.ps1
-            desktop/native/windows/*.klc
+          path: dist/windows/
           if-no-files-found: error
