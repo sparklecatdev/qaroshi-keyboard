@@ -32,7 +32,7 @@ All three layouts type the same 26 Qaroshi letters, including **ë, sh, zh, kh, 
 ### Arch Linux / KDE Plasma / Wayland
 1. Read Keyman's maintained [Arch + KDE/Wayland guide](https://help.keyman.com/knowledge-base/kb0102).
 2. Install the required IBus/Keyman packages. With a configured AUR helper, the documented package is `keyman` from the AUR; verify the current AUR build instructions before installing.
-3. Set up IBus as described in Keyman's [KDE guide](https://help.keyman.com/knowledge-base/kb0106), then log out and log back in if needed.
+3. Set up IBus as described in Keyman's [KDE guide](https://help.keyman.com/knowledge-base/kb0101), then log out and log back in if needed.
 4. Open Keyman Configuration and install the `.kmp` file. Select the Qaroshi keyboard through the input method menu.
 5. Test in a regular GTK or Qt text field. Some KDE/Wayland apps bypass IBus; if it fails in one app but works in another, check its input-method integration.
 
