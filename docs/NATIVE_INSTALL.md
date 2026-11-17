@@ -76,7 +76,7 @@ The APK is a development artifact, not a signed Play Store production release. Y
 
 ## Text-assist behavior and limitations
 
-- 4,395 actual Qaroshi reference headwords (provenance recorded in `data/qaroshi-lexicon.json`); **not the full 30,000+ lexicon** and not empirically observed usage.
+- 30,000 actual Qaroshi reference headwords (provenance recorded in `data/qaroshi-lexicon.json`); **not the full 30,000+ lexicon** and not empirically observed usage.
 - Three prefix suggestions, typo corrections limited to one insert/delete/substitution/transposition and high-confidence tie-breaking.
 - Already-known words, proper-capitalized words, short words and productive hyphenated compounds stay unchanged.
 - Android and iOS expose corrections on space and a one-backspace undo; Linux uses preedit so its edits remain reversible before commit.
