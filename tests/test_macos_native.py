@@ -33,7 +33,7 @@ class MacNative(unittest.TestCase):
                         self.assertEqual(layers[1][code],shifted)
                         self.assertNotEqual(layers[0][code],"\ue000")
                 self.assertEqual(layers[0][49]," ")
-                self.assertEqual(layers[0][18],"1")
+                self.assertEqual(layers[0][18], SPEC.get("extraKeys",{}).get(kind,{}).get("1",["1","!"])[0])
 
 if __name__=="__main__":
     unittest.main()
