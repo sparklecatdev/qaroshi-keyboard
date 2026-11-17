@@ -42,7 +42,16 @@ for kind, rows in SPEC["layoutRows"].items():
                 shifted = original[0].upper() + original[1:] if original else original
             caps = original[0].upper() + original[1:] if letter.isalpha() else original
             output[CODES[key]] = (original, shifted, caps)
+    EXTRA_CODES = {
+        18:"1", 19:"2", 20:"3", 21:"4", 23:"5", 22:"6",
+        26:"7", 28:"8", 25:"9", 29:"0",
+        27:"HYPHEN", 24:"EQUAL", 33:"LBRKT", 30:"RBRKT",
+        42:"BKSLASH", 39:"QUOTE", 50:"BKQUOTE", 49:"SPACE"
+    }
     for code, (low, high) in EXTRA.items():
+        override = SPEC.get("extraKeys",{}).get(kind,{}).get(EXTRA_CODES[code])
+        if override is not None:
+            low, high = override
         output.setdefault(code, (low, high, low))
     keyboard = ET.Element("keyboard", group="126", id=str(-2301 - list(SPEC["layoutRows"]).index(kind)), name=f"Qaroshi {kind.upper()}", maxout="2")
     layouts = ET.SubElement(keyboard, "layouts")
