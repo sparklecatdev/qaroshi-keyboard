@@ -23,6 +23,10 @@ Desktop Keyman installs a **`.kmx`** keyboard, while phone and tablet Keyman ins
 * The four digraphs each represent one native Qaroshi grapheme but output two Latin Unicode characters.
 * On desktop these are **positional** Keyman layouts. Set the base OS layout to **US QWERTY**, then choose the desired Qaroshi QWERTY/AZERTY/Dvorak variant inside Keyman to avoid double remapping.
 
+## Native macOS option
+
+The **desktop build** additionally exports `Qaroshi-Qwerty.keylayout`, `Qaroshi-Azerty.keylayout` and `Qaroshi-Dvorak.keylayout` for direct macOS input-source installation **without Keyman**. See [macOS steps](docs/DESKTOP.md#macos-native-no-keyman-required). These are structurally tested but haven't yet been verified on physical Mac hardware. Windows and Linux retain the Keyman desktop packages for full digraph behavior.
+
 ## Build and test
 
 ```bash
@@ -38,7 +42,7 @@ Build outputs are at `layouts/*/build/*_desktop.kmp` and `layouts/*/build/*_mobi
 
 ## Current scope
 
-The builds compile the Keyman keyboard source and verify expected package contents. **They are not device-installed native Windows DLL, macOS .keylayout, or Linux XKB packages**, and mobile packages do not modify Apple's built-in keyboard or Gboard. Producing native OS layouts and dedicated mobile keyboard apps requires separate platform-specific implementations and testing. CI compilation is not a substitute for real on-device text-entry tests.
+The builds compile the Keyman keyboard source and verify expected package contents. **They are not native Windows DLL or Linux XKB layouts**, and mobile packages do not modify Apple's built-in keyboard or Gboard. Producing native OS layouts and dedicated mobile keyboard apps requires separate platform-specific implementations and testing. CI compilation is not a substitute for real on-device text-entry tests.
 
 ## Repository organization
 
