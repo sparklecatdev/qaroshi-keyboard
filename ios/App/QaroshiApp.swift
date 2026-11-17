@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct QaroshiApp: App {
+struct QaroshiApp: App {\n    @State private var sample = ""
     var body: some Scene {
         WindowGroup {
             NavigationStack {
@@ -14,7 +14,7 @@ struct QaroshiApp: App {
                     Text("Autocorrection is intentionally conservative and only uses the bundled Qaroshi lexicon. No Full Access or network permission is needed.")
                         .font(.footnote)
                         .foregroundStyle(.secondary)
-                    TextField("Practice Qaroshi here", text: .constant(""))
+                    TextField("Practice Qaroshi here", text: $sample)
                         .textInputAutocapitalization(.sentences)
                         .textFieldStyle(.roundedBorder)
                     Spacer()
