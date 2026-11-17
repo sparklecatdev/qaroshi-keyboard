@@ -6,7 +6,7 @@ class MobileProjects(unittest.TestCase):
     def test_both_apps_use_shared_offline_source(self):
         assert (ROOT/"data/qaroshi-lexicon.json").exists()
         data=json.loads((ROOT/"data/qaroshi-lexicon.json").read_text())
-        self.assertGreater(len(data["words"]),4000)
+        self.assertEqual(len(data["words"]),30000)
         self.assertEqual(len(data["words"]),len({w[0] for w in data["words"]}))
         for w,_ in data["words"]:
             self.assertEqual(w,w.lower())
