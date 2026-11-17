@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component>
+  <name>org.freedesktop.IBus.Qaroshi</name>
+  <description>Qaroshi native IBus input engine (offline)</description>
+  <exec>python3 @INSTALL_DIR@/engine.py</exec>
+  <version>0.2.0</version>
+  <author>Qaroshi contributors</author>
+  <license>MIT</license>
+  <homepage>https://github.com/sparklecatdev/qaroshi-keyboard</homepage>
+  <textdomain>qaroshi</textdomain>
+  <engines>
+    <engine>
+      <name>qaroshi-qwerty</name>
+      <longname>Qaroshi QWERTY</longname>
+      <language>und</language>
+      <license>MIT</license>
+      <author>Qaroshi contributors</author>
+      <icon>input-keyboard</icon>
+      <layout>us</layout>
+      <description>Qaroshi QWERTY Romanization</description>
+      <symbol>Qr</symbol>
+      <rank>100</rank>
+    </engine>
+    <engine>
+      <name>qaroshi-azerty</name>
+      <longname>Qaroshi AZERTY</longname>
+      <language>und</language>
+      <license>MIT</license>
+      <author>Qaroshi contributors</author>
+      <icon>input-keyboard</icon>
+      <layout>us</layout>
+      <description>Qaroshi AZERTY Romanization</description>
+      <symbol>Qr</symbol>
+      <rank>99</rank>
+    </engine>
+    <engine>
+      <name>qaroshi-dvorak</name>
+      <longname>Qaroshi DVORAK</longname>
+      <language>und</language>
+      <license>MIT</license>
+      <author>Qaroshi contributors</author>
+      <icon>input-keyboard</icon>
+      <layout>us</layout>
+      <description>Qaroshi DVORAK Romanization</description>
+      <symbol>Qr</symbol>
+      <rank>98</rank>
+    </engine>
+  </engines>
+</component>
