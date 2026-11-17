@@ -8,5 +8,6 @@ for layout in qwerty azerty dvorak; do
   kmc build "layouts/${layout}/source/${id}.kmn" -o "layouts/${layout}/build/${id}.kmx"
   kmc build "layouts/${layout}/source/${id}_desktop.kps" -o "layouts/${layout}/build/${id}_desktop.kmp"
 done
+python3 scripts/build-macos-native.py
 python3 -m unittest discover -s tests -v
 python3 scripts/verify_platform_packages.py desktop
