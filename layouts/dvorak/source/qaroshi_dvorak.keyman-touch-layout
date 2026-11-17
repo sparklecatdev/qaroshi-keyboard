@@ -200,19 +200,19 @@
             "key": [
               {
                 "id": "K_Q",
-                "text": "'",
+                "text": "\"",
                 "layer": "shift",
                 "nextlayer": "default"
               },
               {
                 "id": "K_W",
-                "text": ",",
+                "text": "<",
                 "layer": "shift",
                 "nextlayer": "default"
               },
               {
                 "id": "K_E",
-                "text": ".",
+                "text": ">",
                 "layer": "shift",
                 "nextlayer": "default"
               },
@@ -337,7 +337,7 @@
               },
               {
                 "id": "K_Z",
-                "text": ";",
+                "text": ":",
                 "layer": "shift",
                 "nextlayer": "default"
               },
@@ -805,19 +805,19 @@
             "key": [
               {
                 "id": "K_Q",
-                "text": "'",
+                "text": "\"",
                 "layer": "shift",
                 "nextlayer": "default"
               },
               {
                 "id": "K_W",
-                "text": ",",
+                "text": "<",
                 "layer": "shift",
                 "nextlayer": "default"
               },
               {
                 "id": "K_E",
-                "text": ".",
+                "text": ">",
                 "layer": "shift",
                 "nextlayer": "default"
               },
@@ -942,7 +942,7 @@
               },
               {
                 "id": "K_Z",
-                "text": ";",
+                "text": ":",
                 "layer": "shift",
                 "nextlayer": "default"
               },
