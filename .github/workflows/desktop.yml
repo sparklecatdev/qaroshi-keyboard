@@ -2,7 +2,6 @@ name: Desktop keyboards
 on:
   push:
     branches: [main]
-    tags: ['v*']
   pull_request:
   workflow_dispatch:
 permissions:
@@ -25,8 +24,3 @@ jobs:
           name: qaroshi-desktop-keyboards
           path: layouts/*/build/*_desktop.kmp
           if-no-files-found: error
-      - name: Release desktop packages on version tags
-        if: startsWith(github.ref, 'refs/tags/v')
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: gh release upload "${GITHUB_REF_NAME}" layouts/*/build/*_desktop.kmp --clobber
